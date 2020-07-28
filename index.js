@@ -1,12 +1,17 @@
 const express = require('express');
-const jwt = require('jsonwebtoken');
-
 const CONSTANTS = require('./constants');
 
 const app = express();
 
-app.get('/', (req, res) => {
-    
+function miPrimeroMiddleware(req, res, next) {
+    console.log("Hola :)");
+    next();
+}
+
+app.use(miPrimeroMiddleware);
+
+app.get('/', miPrimeroMiddleware, (req, res) => {
+    res.json({1:1})
 })
 
 
